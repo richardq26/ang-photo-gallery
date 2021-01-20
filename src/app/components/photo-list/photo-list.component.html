@@ -1,0 +1,20 @@
+<div class="row">
+    <!--El photos es el array del component-->
+    <div class="col-md-4 p-4" *ngFor="let photo of photos">
+        <div class="card w-100 h-100 card-photo" (click)="selectedCard(photo._id)">
+            <div class="card-header text-center">
+                {{photo.title | uppercase}}
+            </div>
+            <hr class="p-1 m-0">
+            <div class="w-100 h-100" style="width: 350px; height: 350px">
+                <img class="img-fluid w-100 h-100" [src]="'http://localhost:3000/'+ photo.imagePath"
+                    alt="Foto"/>
+            </div>
+            
+            <hr class="mb-0">
+            <div class="card-body">
+                {{photo.description}}
+            </div>
+        </div>
+    </div>
+</div>
