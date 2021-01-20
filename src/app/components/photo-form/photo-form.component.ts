@@ -12,7 +12,7 @@ interface HtmlInputEvent extends Event {
   styleUrls: ['./photo-form.component.css']
 })
 export class PhotoFormComponent implements OnInit {
-
+  loading = false;
   file: File;
   // El Photo Selected es el que va a reemplazar el icono de no imagen
   photoSelected: string | ArrayBuffer;
@@ -35,12 +35,15 @@ export class PhotoFormComponent implements OnInit {
   }
 
   uploadPhoto(title: HTMLInputElement, description: HTMLTextAreaElement): boolean {
+    this.loading = true;
     this.photoService.createPhoto(title.value, description.value, this.file)
       .subscribe(res => {
         this.router.navigate(['/photos']);
         this.toastr.success('¡Foto agregada con éxito!', 'Foto añadida', { positionClass: 'toast-mid-left' });
+        this.loading = false;
       }
         , err => console.log(err));
+    
     return false;
   }
 

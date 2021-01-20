@@ -10,6 +10,11 @@
         </div>
         <div class="col-md-7">
             <div class="card">
+                <div class="clearfix" *ngIf="loading">
+                    <div class="spinner-border float-right text-primary" role="status">
+                      <span class="visually-hidden"></span>
+                    </div>
+                  </div>
                 <form class="card-body" (submit)="updatePhoto(title, description)">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Título" [value]="photo.foto.title" #title>

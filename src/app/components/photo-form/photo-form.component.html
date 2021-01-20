@@ -1,20 +1,27 @@
 <div class="col-lg-4 mx-auto">
     <div class="card">
+
         <div class="card-header">
             Subir una foto
+            <div  class="spinner-border spinner-border-md text-primary float-right" role="status" *ngIf="loading">
+                <span class="visually-hidden"></span>
+            </div>
         </div>
         <div class="car-body">
+
             <form class="p-3" (submit)="uploadPhoto(title,description)">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Titulo de foto" required #title>
                 </div>
                 <div class="form-group">
-                    <textarea rows="2" class="form-control" placeholder="Descripción de la foto" required #description></textarea>
+                    <textarea rows="2" class="form-control" placeholder="Descripción de la foto" required
+                        #description></textarea>
                 </div>
                 <input type="file" class="form-control d-none" (change)="onPhotoSelected($event)" #photoInput>
                 <!-- Al dar clic nos redirige al input -->
                 <!-- photoSelected nos reemplaza el no-img por la imagen seleccionada -->
-                <img [src]="photoSelected || 'assets/no-img.png'" alt="Subir" class="img-fluid d-flex mx-auto w-45 h-45 imagensubir" (click)="photoInput.click()">
+                <img [src]="photoSelected || 'assets/no-img.png'" alt="Subir"
+                    class="img-fluid d-flex mx-auto w-45 h-45 imagensubir" (click)="photoInput.click()">
 
                 <button class="btn btn-primary btn-block">Cargar</button>
             </form>

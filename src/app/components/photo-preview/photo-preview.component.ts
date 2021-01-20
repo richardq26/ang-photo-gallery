@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PhotoPreviewComponent implements OnInit {
   id: string;
   photo: Photo;
+  loading = false;
   constructor(private activeRoute: ActivatedRoute, private router: Router, private photoService: PhotoService,
               private toastr: ToastrService) { }
 
@@ -38,13 +39,16 @@ export class PhotoPreviewComponent implements OnInit {
   }
 
   updatePhoto(title: HTMLInputElement, description: HTMLTextAreaElement): boolean {
+    this.loading = true;
     this.photoService.updatePhoto(this.id, title.value, description.value)
-    .subscribe(
-      res => {
-        this.toastr.success('¡La foto fue actualizada con éxito!', 'Foto actualizada', { positionClass: 'toast-bottom-right'});
-      },
-      err => console.log(err)
-    );
+      .subscribe(
+        res => {
+          this.toastr.success('¡La foto fue actualizada con éxito!', 'Foto actualizada', { positionClass: 'toast-bottom-right' });
+          this.loading = false;
+        },
+        err => console.log(err)
+      );
+
     // El return false cancela el evento, así no se recarga la página
     return false;
   }
